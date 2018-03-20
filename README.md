@@ -4,4 +4,5 @@
 [*komentorivi.txt*](https://github.com/NiinaM/otm-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
 [*gitlog.txt*](https://github.com/NiinaM/otm-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
-Heipparallaa minä olen muutos
+
+Heipparallaa minä olen muutos jee jee
