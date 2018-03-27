@@ -1,5 +1,11 @@
-# Otsikko
-## viikko1
+# Vaatekaapin hallintajärjestelmä
+Sovellus, jolla voi hallita vaatekaapin sisältöä.
+
+## Dokumentointi
+[Vaatimusmäärittely](https://github.com/NiinaM/otm-harjoitustyo/blob/master/dokumentointi/vaatimusmaarittely.md)
+
+
+### viikko1
 **Minä olen readme tiedosto** ja *minussa* ei ole vielä *mitään* järkevää tekstiä, *koska* tekijäni ei vielä tiedä mitä kirjoittaisi.
 [*komentorivi.txt*](https://github.com/NiinaM/otm-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
