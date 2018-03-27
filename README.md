@@ -1,7 +1,7 @@
 # Vaatekaapin hallintajärjestelmä
 Sovellus, jolla voi hallita vaatekaapin sisältöä.
 
-## Dokumentointi
+## [Dokumentointi](https://github.com/NiinaM/otm-harjoitustyo/tree/master/dokumentointi)
 [Vaatimusmäärittely](https://github.com/NiinaM/otm-harjoitustyo/blob/master/dokumentointi/vaatimusmaarittely.md)
 
 
