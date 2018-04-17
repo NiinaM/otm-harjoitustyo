@@ -2,7 +2,9 @@
 
 ## Rakenne
 
-Ohjelman rakenne noudattelee kolmitasoista kerrosarkkitehtuuria
+Ohjelman rakenne noudattelee kolmitasoista kerrosarkkitehtuuria.
+
+<img src="https://github.com/NiinaM/otm-harjoitustyo/blob/master/dokumentointi/kuvat/rakenne.jpg" width="700">
 
 ## Sovelluslogiikka
 
