@@ -4,7 +4,7 @@
 
 Ohjelman rakenne noudattelee kolmitasoista kerrosarkkitehtuuria.
 
-<img src="https://github.com/NiinaM/otm-harjoitustyo/blob/master/dokumentointi/kuvat/rakenne.jpg" width="400">
+<img src="https://github.com/NiinaM/otm-harjoitustyo/blob/master/dokumentointi/kuvat/rakenne.jpg" width="200">
 
 ## Sovelluslogiikka
 
