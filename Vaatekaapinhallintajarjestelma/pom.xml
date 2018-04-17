@@ -35,7 +35,7 @@
                 <version>0.8.0</version>
                 <configuration>
                     <excludes>
-                        <exclude>vaatekaapinhallintajarjestelma/ui</exclude>
+                        <exclude>**/vaatekaapinhallintajarjestelma/ui/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

@@ -10,7 +10,7 @@ import com.mycompany.vaatekaapinhallintajarjestelma.domain.SizeEnum;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.TypeEnum;
 
 public class ClosetOrganizingSystemMain {
-
+    
     public static void main(String[] args) {
         Clothing redTrousers = new Clothing("punaiset housut", ColorsEnum.PUNAINEN, ConditionEnum.UUSI, 32, SizeEnum.XSMALL, TypeEnum.HOUSUT, IsItLaundryEnum.PUHDAS, 30, MaterialsEnum.AKRYYLI);
         System.out.println(redTrousers.toString());
