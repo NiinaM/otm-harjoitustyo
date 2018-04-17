@@ -9,7 +9,7 @@ Yksinkertainen luokkakaavio:
 
 Ensimmäinen versioni luokka/pakkauskaaviosta, jossa on myös mukana luokka Shelf, vaikken olekaan sellaista vielä tehnyt. Kaaviossa ei ole dao:ssa mitään koska en ole vielä tehnyt daoluokkia. En ole aiemmin tehnyt tällaista kaaviota, niin voi olla että se on puutteellinen myös sen vuoksi.
 
-<img src="https://github.com/NiinaM/otm-harjoitustyo/blob/master/dokumentointi/kuvat/Pakkausluokkakaavio%20ekaversio.jpg" width="700">
+<img src="https://github.com/NiinaM/otm-harjoitustyo/blob/master/dokumentointi/kuvat/Pakkausluokkakaavio%20ekaversio.jpg" width="500">
 
 
 
