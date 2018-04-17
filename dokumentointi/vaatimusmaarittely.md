@@ -15,6 +15,7 @@ Vaatekaapin sisuksen(vaatteiden)kokonais arvoa tms. Voi tallentaa vaatteen kuvan
 * Käyttäjä voi poistaa vaatteen
 * Käyttäjä voi selvittää vaatekaappinsa kokonaisarvon
 * Vaatteita voi järjestää
+* Voi hakea määrän kuinka monet housut esimerkiksi omistaa.
 
 ## Jatkokehitysideoita
 
