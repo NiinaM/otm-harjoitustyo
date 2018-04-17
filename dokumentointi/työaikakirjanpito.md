@@ -12,3 +12,4 @@
 | 17.04 | 3 | Luin ohjeita, yritin saada jacocon toimimaan, tein Enumeja ja lisäsin toiminnallisuutta ja Checstylen|
 | | 2 | Tein testejä ja siistin koodia |
 | | 2 | Tein rakennedokumentaatiota sekä selvitin miten checstylen ja jacocon saa jättämään tiedoston pois |
+| yht | 24 | |
