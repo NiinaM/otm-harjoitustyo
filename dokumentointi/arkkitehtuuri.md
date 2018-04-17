@@ -1,5 +1,9 @@
 # Arkkitehtuurikuvaus
 
+## Rakenne
+
+Ohjelman rakenne noudattelee kolmitasoista kerrosarkkitehtuuria
+
 ## Sovelluslogiikka
 
 Sovellusten loogisen datamallin muodostavat luokat Closet ja Clothing, mahdollisesti myös luokka Shelf, mutta en ole vielä päättänyt miten toteutan kaapin hyllyt ja siksi en ole vielä varma teenkö siitä oman luokkansa. Nyt kuitenkin alustaviin kaavioihin merkitsin hyllyn omaksi luokakseen.
