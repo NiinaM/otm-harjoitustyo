@@ -17,6 +17,15 @@ Ensimmäinen versioni luokka/pakkauskaaviosta, jossa on myös mukana luokka Shel
 
 <img src="https://github.com/NiinaM/otm-harjoitustyo/blob/master/dokumentointi/kuvat/Pakkausluokkakaavio%20ekaversio.jpg" width="500">
 
+## Tietojen pysyväistallennus
+
+### Päätoiminnallisuudet
+
+Kuvataan seuraavaksi sovelluksen toimintalogiikkaa yhden päätoiminnallisuuden osalta sekvenssikaaviona.
+
+#### Vaatteen lisääminen vaatekaappiin
+<img src="<img src="https://github.com/NiinaM/otm-harjoitustyo/blob/master/dokumentointi/kuvat/Luokkakaavion%20aloitus%20versio.jpg" width="700">" width="700">
+
 
 
 
