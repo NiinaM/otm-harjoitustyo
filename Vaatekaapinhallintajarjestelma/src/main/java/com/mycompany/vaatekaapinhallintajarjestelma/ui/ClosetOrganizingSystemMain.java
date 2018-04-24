@@ -1,5 +1,14 @@
 package com.mycompany.vaatekaapinhallintajarjestelma.ui;
 
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.event.Event;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.Closet;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.MaterialsEnum;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.ColorsEnum;
@@ -9,13 +18,22 @@ import com.mycompany.vaatekaapinhallintajarjestelma.domain.IsItLaundryEnum;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.SizeEnum;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.TypeEnum;
 
-public class ClosetOrganizingSystemMain {
-    
+public class ClosetOrganizingSystemMain extends Application implements EventHandler<ActionEvent> {
+
+    Button button1;
+    Closet niinasCloset;
+
     public static void main(String[] args) {
+        launch(args);
+
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
         Clothing redTrousers = new Clothing("punaiset housut", ColorsEnum.PUNAINEN, ConditionEnum.UUSI, 32, SizeEnum.XSMALL, TypeEnum.HOUSUT, IsItLaundryEnum.PUHDAS, 30, MaterialsEnum.AKRYYLI);
         System.out.println(redTrousers.toString());
 
-        Closet niinasCloset = new Closet("Niina");
+        niinasCloset = new Closet("Niina");
         niinasCloset.addClothing(redTrousers);
         System.out.println(niinasCloset.valueOfAllTheItemsInCloset());
 
@@ -24,5 +42,27 @@ public class ClosetOrganizingSystemMain {
 
         niinasCloset.addClothing(new Clothing("siniset housut", ColorsEnum.SININEN, ConditionEnum.EHJA, 34, SizeEnum.SMALL, TypeEnum.HOUSUT, IsItLaundryEnum.KAYTETTY, 50, MaterialsEnum.AKRYYLI));
         System.out.println("Kaapissa on housuja " + niinasCloset.howManyOfTheseItemsInCloset(TypeEnum.HOUSUT) + " kappaletta.");
+        
+        primaryStage.setTitle("Vaattekaappi");
+
+        button1 = new Button();
+        button1.setText("Vaatteiden yhteisarvo");
+        button1.setOnAction(this);
+
+        StackPane layout = new StackPane();
+        layout.getChildren().add(button1);
+
+        Scene scene = new Scene(layout, 400, 400);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
+
+    @Override
+    public void handle(ActionEvent event) {
+
+        if (event.getSource() == button1) {
+            System.out.println(niinasCloset.valueOfAllTheItemsInCloset());
+        }
+    }
+
 }
