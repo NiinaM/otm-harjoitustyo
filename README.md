@@ -9,3 +9,8 @@ Sovellus, jolla voi hallita vaatekaapin sisältöä.
 [Testausdokumentti](https://github.com/NiinaM/otm-harjoitustyo/blob/master/dokumentointi/testausdokumentti.md)
 
 [Arkkitehtuurikuvaus](https://github.com/NiinaM/otm-harjoitustyo/blob/master/dokumentointi/arkkitehtuuri.md)
+
+
+## Releaset
+
+[Viikko 5](https://github.com/NiinaM/otm-harjoitustyo/releases/tag/viikko5)
