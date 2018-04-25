@@ -12,4 +12,6 @@
 | 17.04 | 3 | Luin ohjeita, yritin saada jacocon toimimaan, tein Enumeja ja lisäsin toiminnallisuutta ja Checstylen|
 | | 2 | Tein testejä ja siistin koodia |
 | | 2 | Tein rakennedokumentaatiota sekä selvitin miten checstylen ja jacocon saa jättämään tiedoston pois |
-| yht | 24 | |
+| 24.04 | 2 | Luin mitä pitää tehdä ja mietin, että mistä aloittaisin ja miten aloittaisin käyttöliittymää |
+| 25.04 | 3 | Opettelin käyttöliittymän koodin tekoa ja kirjoitin sitä vähän. Sen lisäksi tein sekvenssikaavio, siistin repoa |
+| yht | 29 | |
