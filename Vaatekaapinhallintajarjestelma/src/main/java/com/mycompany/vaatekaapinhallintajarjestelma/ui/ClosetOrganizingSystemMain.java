@@ -30,6 +30,29 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        //Testidatan syöttämisen kutsuminen
+        this.testData();
+        primaryStage.setTitle("Vaattekaappi");
+        Scene scene = this.createStartScene();
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public Scene createStartScene() {
+
+        button1 = new Button();
+        button1.setText("Vaatteiden yhteisarvo");
+        button1.setOnAction(this);
+
+        StackPane layout = new StackPane();
+        layout.getChildren().add(button1);
+
+        return new Scene(layout, 400, 400);
+
+    }
+
+    //Testidatan syöttäminen
+    private void testData() {
         Clothing redTrousers = new Clothing("punaiset housut", ColorsEnum.PUNAINEN, ConditionEnum.UUSI, 32, SizeEnum.XSMALL, TypeEnum.HOUSUT, IsItLaundryEnum.PUHDAS, 30, MaterialsEnum.AKRYYLI);
         System.out.println(redTrousers.toString());
 
@@ -42,19 +65,6 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
 
         niinasCloset.addClothing(new Clothing("siniset housut", ColorsEnum.SININEN, ConditionEnum.EHJA, 34, SizeEnum.SMALL, TypeEnum.HOUSUT, IsItLaundryEnum.KAYTETTY, 50, MaterialsEnum.AKRYYLI));
         System.out.println("Kaapissa on housuja " + niinasCloset.howManyOfTheseItemsInCloset(TypeEnum.HOUSUT) + " kappaletta.");
-        
-        primaryStage.setTitle("Vaattekaappi");
-
-        button1 = new Button();
-        button1.setText("Vaatteiden yhteisarvo");
-        button1.setOnAction(this);
-
-        StackPane layout = new StackPane();
-        layout.getChildren().add(button1);
-
-        Scene scene = new Scene(layout, 400, 400);
-        primaryStage.setScene(scene);
-        primaryStage.show();
     }
 
     @Override
