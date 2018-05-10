@@ -21,7 +21,8 @@ import com.mycompany.vaatekaapinhallintajarjestelma.domain.TypeEnum;
 public class ClosetOrganizingSystemMain extends Application implements EventHandler<ActionEvent> {
 
     Button button1;
-    Closet niinasCloset;
+    Button button2;
+    Button button3;
 
     public static void main(String[] args) {
         launch(args);
@@ -30,9 +31,8 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //Testidatan syöttämisen kutsuminen
-        this.testData();
-        primaryStage.setTitle("Vaattekaappi");
+
+        primaryStage.setTitle("Vaatekaapinhallintajärjestelmä");
         Scene scene = this.createStartScene();
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -41,35 +41,42 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     public Scene createStartScene() {
 
         button1 = new Button();
-        button1.setText("Vaatteiden yhteisarvo");
+        button1.setText("Luo kaappi");
         button1.setOnAction(this);
 
+        button2 = new Button();
+        button2.setText("Luo Vaate");
+        button2.setOnAction(this);
+
+        button3 = new Button();
+        button3.setText("Listaa kaapit");
+        button3.setOnAction(this);
+
         StackPane layout = new StackPane();
+        //en ole varma miten nämä toteutetaan oikein, niin etteivät mene päällekäin
         layout.getChildren().add(button1);
+        layout.getChildren().add(button2);
+        layout.getChildren().add(button3);
 
         return new Scene(layout, 400, 400);
 
-    }
-
-    //Testidatan syöttäminen
-    private void testData() {
-        Clothing redTrousers = new Clothing("punaiset housut", ColorsEnum.PUNAINEN, ConditionEnum.UUSI, 32, SizeEnum.XSMALL, TypeEnum.HOUSUT, IsItLaundryEnum.PUHDAS, 30, MaterialsEnum.AKRYYLI);
-        System.out.println(redTrousers.toString());
-
-        niinasCloset = new Closet("Niina");
-        System.out.println(niinasCloset.valueOfAllTheItemsInCloset());
-
-        redTrousers.setCondition(ConditionEnum.RIKKI);
-        System.out.println(redTrousers.getCondition());
-
-        System.out.println("Kaapissa on housuja " + niinasCloset.howManyOfTheseItemsInCloset(TypeEnum.HOUSUT) + " kappaletta.");
     }
 
     @Override
     public void handle(ActionEvent event) {
 
         if (event.getSource() == button1) {
-            System.out.println(niinasCloset.valueOfAllTheItemsInCloset());
+            //testi vielä, oikeasti käyttäjältä pyydetään kaapin omistaja sekä kaapin nimi
+            Closet newCloset = new Closet("Niina");
+        }
+
+        if (event.getSource() == button2) {
+            //testi vielä oikeasti käyttäjältä pyydetään tiedot(enumit voisivat olla pudotusvalikoissa)
+            Clothing newClothing = new Clothing("Punainen paita", ColorsEnum.PUNAINEN, ConditionEnum.EHJA, 32, SizeEnum.XSMALL, TypeEnum.TPAITA, IsItLaundryEnum.KAYTETTY, 10, MaterialsEnum.LYKRA);
+        }
+
+        if (event.getSource() == button3) {
+            //en ole varma miten toteutan, koska tässä pitäisi listata vaatekaapit ja ne ovat tiedossa tietokannassa, jos liian vaikeaa, niin jätetään pois
         }
     }
 
