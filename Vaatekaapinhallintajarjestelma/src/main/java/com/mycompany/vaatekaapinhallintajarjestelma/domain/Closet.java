@@ -10,8 +10,9 @@ public class Closet {
     public Closet(String name) {
         this.owner = name;
         this.shelves = new ArrayList<>();
+        this.makeShelves();
     }
-    
+    //kaapissa on aina viisi hyllyä
     public void makeShelves() {
         for (int i = 0; i <= 5; i++) {
             Shelf shelf = new Shelf();
