@@ -13,7 +13,7 @@ public class Closet {
     }
     
     public void makeShelves() {
-        for (int i = 0; i <= 20; i++) {
+        for (int i = 0; i <= 5; i++) {
             Shelf shelf = new Shelf();
             this.shelves.add(shelf);
         }

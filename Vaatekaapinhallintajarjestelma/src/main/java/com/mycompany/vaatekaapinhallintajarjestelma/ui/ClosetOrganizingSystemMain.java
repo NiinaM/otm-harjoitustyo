@@ -17,6 +17,7 @@ import com.mycompany.vaatekaapinhallintajarjestelma.domain.ConditionEnum;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.IsItLaundryEnum;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.SizeEnum;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.TypeEnum;
+import javafx.scene.layout.VBox;
 
 public class ClosetOrganizingSystemMain extends Application implements EventHandler<ActionEvent> {
 
@@ -33,8 +34,8 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     public void start(Stage primaryStage) throws Exception {
 
         primaryStage.setTitle("Vaatekaapinhallintajärjestelmä");
-        Scene scene = this.createStartScene();
-        primaryStage.setScene(scene);
+        Scene scene1 = this.createStartScene();
+        primaryStage.setScene(scene1);
         primaryStage.show();
     }
 
@@ -52,13 +53,14 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
         button3.setText("Listaa kaapit");
         button3.setOnAction(this);
 
-        StackPane layout = new StackPane();
-        //en ole varma miten nämä toteutetaan oikein, niin etteivät mene päällekäin
-        layout.getChildren().add(button1);
-        layout.getChildren().add(button2);
-        layout.getChildren().add(button3);
+        VBox vbox = new VBox();
+        vbox.setSpacing(10);
 
-        return new Scene(layout, 400, 400);
+        //en ole varma miten nämä toteutetaan oikein, niin etteivät mene päällekäin
+        vbox.getChildren().addAll(button1, button2, button3);
+        StackPane layout = new StackPane(vbox);
+
+        return new Scene(layout, 150, 150);
 
     }
 
@@ -66,13 +68,11 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     public void handle(ActionEvent event) {
 
         if (event.getSource() == button1) {
-            //testi vielä, oikeasti käyttäjältä pyydetään kaapin omistaja sekä kaapin nimi
-            Closet newCloset = new Closet("Niina");
+            //siirtää kaapin luomis ruutuun
         }
 
         if (event.getSource() == button2) {
-            //testi vielä oikeasti käyttäjältä pyydetään tiedot(enumit voisivat olla pudotusvalikoissa)
-            Clothing newClothing = new Clothing("Punainen paita", ColorsEnum.PUNAINEN, ConditionEnum.EHJA, 32, SizeEnum.XSMALL, TypeEnum.TPAITA, IsItLaundryEnum.KAYTETTY, 10, MaterialsEnum.LYKRA);
+            //siirtää vaatteen luomisruutuun
         }
 
         if (event.getSource() == button3) {
