@@ -9,14 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.event.Event;
-import com.mycompany.vaatekaapinhallintajarjestelma.domain.Closet;
-import com.mycompany.vaatekaapinhallintajarjestelma.domain.MaterialsEnum;
-import com.mycompany.vaatekaapinhallintajarjestelma.domain.ColorsEnum;
-import com.mycompany.vaatekaapinhallintajarjestelma.domain.Clothing;
-import com.mycompany.vaatekaapinhallintajarjestelma.domain.ConditionEnum;
-import com.mycompany.vaatekaapinhallintajarjestelma.domain.IsItLaundryEnum;
-import com.mycompany.vaatekaapinhallintajarjestelma.domain.SizeEnum;
-import com.mycompany.vaatekaapinhallintajarjestelma.domain.TypeEnum;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class ClosetOrganizingSystemMain extends Application implements EventHandler<ActionEvent> {
@@ -24,6 +17,10 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     Button button1;
     Button button2;
     Button button3;
+    Button button4;
+
+    Stage window;
+    Scene scene1, scene2, scene3;
 
     public static void main(String[] args) {
         launch(args);
@@ -33,8 +30,12 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        primaryStage.setTitle("Vaatekaapinhallintajärjestelmä");
-        Scene scene1 = this.createStartScene();
+        this.window = primaryStage;
+        this.window.setTitle("Vaatekaapinhallintajärjestelmä");
+        scene1 = this.createStartScene();
+        scene2 = this.creatClosetCreationScene();
+        scene3 = this.creatClothingCreationScene();
+
         primaryStage.setScene(scene1);
         primaryStage.show();
     }
@@ -49,19 +50,48 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
         button2.setText("Luo Vaate");
         button2.setOnAction(this);
 
+        VBox vbox = new VBox();
+        vbox.setSpacing(10);
+
+        vbox.getChildren().addAll(button1, button2);
+        StackPane layout = new StackPane(vbox);
+
+        return new Scene(layout, 400, 150);
+
+    }
+
+    public Scene creatClosetCreationScene() {
+        //puuttuu kaikenlaista vielä
+        Label label = new Label("Täällä voit luoda kaapin.");
+
         button3 = new Button();
-        button3.setText("Listaa kaapit");
+        button3.setText("Luo kaappi");
         button3.setOnAction(this);
 
         VBox vbox = new VBox();
         vbox.setSpacing(10);
 
-        //en ole varma miten nämä toteutetaan oikein, niin etteivät mene päällekäin
-        vbox.getChildren().addAll(button1, button2, button3);
+        vbox.getChildren().addAll(label, button3);
         StackPane layout = new StackPane(vbox);
 
-        return new Scene(layout, 150, 150);
+        return new Scene(layout, 400, 150);
+    }
 
+    public Scene creatClothingCreationScene() {
+        //puuttuu kaikenlaista vielä
+        Label label = new Label("Täällä voit luoda vaatteen ja lisätä sen hyllyyn.");
+
+        button4 = new Button();
+        button4.setText("Luo vaate");
+        button4.setOnAction(this);
+
+        VBox vbox = new VBox();
+        vbox.setSpacing(10);
+
+        vbox.getChildren().addAll(label, button4);
+        StackPane layout = new StackPane(vbox);
+
+        return new Scene(layout, 400, 150);
     }
 
     @Override
@@ -69,14 +99,24 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
 
         if (event.getSource() == button1) {
             //siirtää kaapin luomis ruutuun
+            window.setScene(scene2);
         }
 
         if (event.getSource() == button2) {
             //siirtää vaatteen luomisruutuun
+            window.setScene(scene3);
         }
-
+        
         if (event.getSource() == button3) {
-            //en ole varma miten toteutan, koska tässä pitäisi listata vaatekaapit ja ne ovat tiedossa tietokannassa, jos liian vaikeaa, niin jätetään pois
+            //kaapin luonti
+            //palautus alkuruutuun
+            window.setScene(scene1);
+        }
+        
+        if (event.getSource() == button4) {
+            //vaatteen luonti
+            //palautus alkuruutuun
+            window.setScene(scene1);
         }
     }
 
