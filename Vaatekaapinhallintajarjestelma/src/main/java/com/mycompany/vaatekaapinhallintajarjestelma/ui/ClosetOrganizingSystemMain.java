@@ -57,13 +57,11 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
         System.out.println(redTrousers.toString());
 
         niinasCloset = new Closet("Niina");
-        niinasCloset.addClothing(redTrousers);
         System.out.println(niinasCloset.valueOfAllTheItemsInCloset());
 
         redTrousers.setCondition(ConditionEnum.RIKKI);
         System.out.println(redTrousers.getCondition());
 
-        niinasCloset.addClothing(new Clothing("siniset housut", ColorsEnum.SININEN, ConditionEnum.EHJA, 34, SizeEnum.SMALL, TypeEnum.HOUSUT, IsItLaundryEnum.KAYTETTY, 50, MaterialsEnum.AKRYYLI));
         System.out.println("Kaapissa on housuja " + niinasCloset.howManyOfTheseItemsInCloset(TypeEnum.HOUSUT) + " kappaletta.");
     }
 
