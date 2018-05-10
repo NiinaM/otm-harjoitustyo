@@ -18,9 +18,11 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     Button button2;
     Button button3;
     Button button4;
+    Button button5;
+    Button button6;
 
     Stage window;
-    Scene scene1, scene2, scene3;
+    Scene scene1, scene2, scene3, scene4;
 
     public static void main(String[] args) {
         launch(args);
@@ -35,6 +37,7 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
         scene1 = this.createStartScene();
         scene2 = this.creatClosetCreationScene();
         scene3 = this.creatClothingCreationScene();
+        scene4 = this.creatClosetScene();
 
         primaryStage.setScene(scene1);
         primaryStage.show();
@@ -49,15 +52,36 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
         button2 = new Button();
         button2.setText("Luo Vaate");
         button2.setOnAction(this);
+        
+        button5 = new Button();
+        button5.setText("Kaappiin");
+        button5.setOnAction(this);
 
         VBox vbox = new VBox();
         vbox.setSpacing(10);
 
-        vbox.getChildren().addAll(button1, button2);
+        vbox.getChildren().addAll(button1, button2, button5);
         StackPane layout = new StackPane(vbox);
 
         return new Scene(layout, 400, 150);
 
+    }
+
+    public Scene creatClosetScene() {
+        //puuttuu kaikenlaista vielä
+        Label label = new Label("Kaappi");
+
+        button6 = new Button();
+        button6.setText("Takaisin alkuun");
+        button6.setOnAction(this);
+        
+        VBox vbox = new VBox();
+        vbox.setSpacing(10);
+
+        vbox.getChildren().addAll(label);
+        StackPane layout = new StackPane(vbox);
+
+        return new Scene(layout, 400, 150);
     }
 
     public Scene creatClosetCreationScene() {
@@ -106,16 +130,26 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
             //siirtää vaatteen luomisruutuun
             window.setScene(scene3);
         }
-        
+
         if (event.getSource() == button3) {
             //kaapin luonti
             //palautus alkuruutuun
             window.setScene(scene1);
         }
-        
+
         if (event.getSource() == button4) {
             //vaatteen luonti
             //palautus alkuruutuun
+            window.setScene(scene1);
+        }
+        
+        if (event.getSource() == button5) {
+            //siirtää kaappi ruutuun
+            window.setScene(scene4);
+        }
+        
+        if (event.getSource() == button6) {
+            //siirtää takaisin alkuruutuun
             window.setScene(scene1);
         }
     }
