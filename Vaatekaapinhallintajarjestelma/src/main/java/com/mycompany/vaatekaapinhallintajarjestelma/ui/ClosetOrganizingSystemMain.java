@@ -28,9 +28,11 @@ import javafx.scene.layout.VBox;
 public class ClosetOrganizingSystemMain extends Application implements EventHandler<ActionEvent> {
 
     Closet closet;
+    Clothing clothing;
     Button buttonLeadsToCreateCloset;
     Button buttonLeadsToCreateClothing;
     Button buttonBringsBackToStart;
+    Button buttonBringsBackToShelf;
     Button buttonCreateClothing;
     Button buttonPicksTheShelfFromDropDown;
     Button buttonPicksTheClothingFromDropDown;
@@ -43,13 +45,14 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     Button buttonWash;
     Button buttonRemoveClothing;
     Label nameClothing;
+    Label labelMessage;
     TextField textFieldTheOwnersName;
     TextField sizeInInceText;
     TextField clothingName;
     TextField priceOfClothing;
 
     int shelfNumber;
-    String choocedClothingFromDropDownInShelf;
+    String chosenClothingFromDropDownInShelf;
     ChoiceBox<Integer> choiceBoxShelves;
     ChoiceBox<String> choiceBoxClothes;
     ChoiceBox<String> choiceBoxColor;
@@ -60,7 +63,7 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     ChoiceBox<String> choiceBoxMaterial;
 
     Stage window;
-    Scene sceneStart, sceneClosetCreation, sceneClothingCreation, sceneCloset;
+    Scene sceneStart, sceneCloset;
 
     public static void main(String[] args) {
         launch(args);
@@ -70,11 +73,10 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     @Override
     public void start(Stage primaryStage) throws Exception {
 
+        closet = new Closet("", new FileShelfDao("vaatteet.txt"));
         this.window = primaryStage;
         this.window.setTitle("Vaatekaapinhallintajärjestelmä");
         sceneStart = this.createStartScene();
-        sceneClosetCreation = this.createClosetCreationScene();
-        sceneClothingCreation = this.creatClothingCreationScene();
         sceneCloset = this.createClosetScene();
 
         this.window.setScene(sceneStart);
@@ -99,7 +101,7 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
 
     private Scene createClosetScene() {
 
-        Label label = new Label(textFieldTheOwnersName.getText() + "n Kaappi");
+        Label label = new Label("Kaappi");
 
         Label choices = new Label("Hyllyvalikko");
         choiceBoxShelves = new ChoiceBox<>();
@@ -141,6 +143,7 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
 
         Label choices = new Label("Vaatevalikko");
         choiceBoxClothes = new ChoiceBox<>();
+
         ArrayList<Clothing> clothes = this.closet.getShelves().get(shelfNumber - 1).getClothes();
         for (int i = 0; i < clothes.size(); i++) {
             String clothingName = clothes.get(i).getName();
@@ -185,12 +188,25 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     }
 
     private Scene createClothingScene() {
-        Label label = new Label("Vaate: " + this.choocedClothingFromDropDownInShelf);
+        Label label = new Label("Vaate: " + clothing.getName());
+
+        Label label1 = new Label(clothing.getColor().toString());
+        Label label2 = new Label(clothing.getCondition().toString());
+        Label label3 = new Label(Integer.toString(clothing.getSizeInInches()));
+        Label label4 = new Label(clothing.getSize().toString());
+        Label label5 = new Label(clothing.getType().toString());
+        Label label6 = new Label(clothing.getHowDirty().toString());
+        Label label7 = new Label(Integer.toString(clothing.getPrice()));
+        Label label8 = new Label(clothing.getMaterial().toString());
+
+        buttonBringsBackToShelf = new Button();
+        buttonBringsBackToShelf.setText("Takaisin hyllyyn");
+        buttonBringsBackToShelf.setOnAction(this);
 
         VBox vbox = new VBox();
         vbox.setSpacing(10);
 
-        vbox.getChildren().addAll(label);
+        vbox.getChildren().addAll(label, label1, label2, label3, label4, label5, label6, label7, label8, buttonBringsBackToShelf);
         StackPane layout = new StackPane(vbox);
 
         return new Scene(layout, 400, 150);
@@ -276,6 +292,9 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
         buttonBringsBackToStart.setText("Siirry alkunäkymään");
         buttonBringsBackToStart.setOnAction(this);
 
+        labelMessage = new Label();
+        labelMessage.setText("");
+
         VBox vbox = new VBox();
         vbox.setSpacing(10);
 
@@ -298,7 +317,10 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
                 priceOfClothing,
                 material,
                 choiceBoxMaterial,
-                buttonCreateClothing, buttonBringsBackToStart);
+                labelMessage,
+                buttonCreateClothing,
+                buttonBringsBackToStart
+        );
         StackPane layout = new StackPane(vbox);
 
         return new Scene(layout, 400, 700);
@@ -309,12 +331,12 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
 
         if (event.getSource() == buttonLeadsToCreateCloset) {
             //siirtää kaapin luomis ruutuun
-            window.setScene(sceneClosetCreation);
+            window.setScene(this.createClosetCreationScene());
         }
 
         if (event.getSource() == buttonLeadsToCreateClothing) {
             //siirtää vaatteen luomisruutuun
-            window.setScene(sceneClothingCreation);
+            window.setScene(this.creatClothingCreationScene());
         }
 
         if (event.getSource() == buttonBringsBackToStart) {
@@ -324,8 +346,10 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
 
         if (event.getSource() == buttonCreateClothing) {
             //vaatteen luonti
-            this.createClothing();
-            window.setScene(this.createClothingScene());
+            Boolean success = this.createClothing();
+            if (success) {
+                window.setScene(this.createClothingScene());
+            }
         }
 
         if (event.getSource() == buttonPicksTheShelfFromDropDown) {
@@ -339,7 +363,7 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
         }
 
         if (event.getSource() == buttonCreatesCloset) {
-            closet = new Closet(textFieldTheOwnersName.getText(), new FileShelfDao("vaatteet.txt"));
+            closet.setOwner(textFieldTheOwnersName.getText());
             window.setScene(sceneCloset);
         }
 
@@ -379,6 +403,10 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
             this.removeClothing(choiceBoxClothes);
 
         }
+
+        if (event.getSource() == buttonBringsBackToShelf) {
+            window.setScene(this.createSheflScene());
+        }
     }
 
     private String getColor(ChoiceBox<String> choiceBox1) {
@@ -411,19 +439,29 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
         return material;
     }
 
-    private void createClothing() {
-        Clothing clothing = new Clothing(
+    private Boolean createClothing() {
+        int size = 0;
+        int price = 0;
+        try {
+            size = Integer.parseInt(sizeInInceText.getText());
+            price = Integer.parseInt(priceOfClothing.getText());
+        } catch (NumberFormatException e) {
+            labelMessage.setText("Et syöttänyt numeroita!");
+            return false;
+        }
+        clothing = new Clothing(
                 clothingName.getText(),
                 ColorsEnum.valueOf(this.getColor(choiceBoxColor)),
                 ConditionEnum.valueOf(this.getCondition(choiceBoxCondition)),
-                Integer.parseInt(sizeInInceText.getText()),
+                size,
                 SizeEnum.valueOf(this.getSize(choiceBoxSize)),
                 TypeEnum.valueOf(this.getType(choiceBoxType)),
                 IsItLaundryEnum.valueOf(this.getIsItLaundry(choiceBoxIsItLaundry)),
-                Integer.parseInt(priceOfClothing.getText()),
+                price,
                 MaterialsEnum.valueOf(this.getMaterial(choiceBoxMaterial)));
         Shelf shelf = closet.getShelves().get(shelfNumber - 1);
-        closet.addClothing(shelf, clothing);
+        labelMessage.setText(closet.addClothing(shelf, clothing));
+        return true;
     }
 
     private void getShelf(ChoiceBox<Integer> choiceBox) {
@@ -432,17 +470,23 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     }
 
     private void getClothingForCreatingClothing(ChoiceBox<String> choiceBox) {
-        choocedClothingFromDropDownInShelf = choiceBox.getValue();
+        chosenClothingFromDropDownInShelf = choiceBox.getValue();
+        ArrayList<Clothing> clothes = closet.getShelves().get(shelfNumber).getClothes();
+        for (int i = 0; i < clothes.size(); i++) {
+            if (clothes.get(i).getName().equals(chosenClothingFromDropDownInShelf)) {
+                clothing = clothes.get(i);
+            }
+        }
         window.setScene(this.createClothingScene());
 
     }
 
     private void repairClothes(ChoiceBox<String> choiceBox) {
-        choocedClothingFromDropDownInShelf = choiceBox.getValue();
+        chosenClothingFromDropDownInShelf = choiceBox.getValue();
         ArrayList<Clothing> clothes = closet.getShelves().get(shelfNumber).getClothes();
         for (int i = 0; i < clothes.size(); i++) {
             Clothing item = closet.getShelves().get(shelfNumber).getClothes().get(i);
-            if (clothes.get(i).getName().equals(choocedClothingFromDropDownInShelf)) {
+            if (clothes.get(i).getName().equals(chosenClothingFromDropDownInShelf)) {
                 item.repair();
             }
         }
@@ -450,11 +494,11 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     }
 
     private void washClothes(ChoiceBox<String> choiceBox) {
-        choocedClothingFromDropDownInShelf = choiceBox.getValue();
+        chosenClothingFromDropDownInShelf = choiceBox.getValue();
         ArrayList<Clothing> clothes = closet.getShelves().get(shelfNumber).getClothes();
         for (int i = 0; i < clothes.size(); i++) {
             Clothing item = closet.getShelves().get(shelfNumber).getClothes().get(i);
-            if (clothes.get(i).getName().equals(choocedClothingFromDropDownInShelf)) {
+            if (clothes.get(i).getName().equals(chosenClothingFromDropDownInShelf)) {
                 item.wash();
             }
         }
@@ -462,11 +506,11 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     }
 
     private void removeClothing(ChoiceBox<String> choiceBox) {
-        choocedClothingFromDropDownInShelf = choiceBox.getValue();
+        chosenClothingFromDropDownInShelf = choiceBox.getValue();
         ArrayList<Clothing> clothes = closet.getShelves().get(shelfNumber).getClothes();
         for (int i = 0; i < clothes.size(); i++) {
             Clothing item = closet.getShelves().get(shelfNumber).getClothes().get(i);
-            if (clothes.get(i).getName().equals(choocedClothingFromDropDownInShelf)) {
+            if (clothes.get(i).getName().equals(chosenClothingFromDropDownInShelf)) {
                 closet.getShelves().get(shelfNumber).removeClothing(item);
             }
         }

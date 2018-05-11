@@ -24,6 +24,12 @@ public class Closet {
         this.owner = name;
         this.shelves = this.dao.getAll();
     }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+    
+    
     
     public String addClothing(Shelf shelf, Clothing clothing) {
         if (shelf.addClothing(clothing)) {
