@@ -20,11 +20,12 @@ Sovellus aukeaa aloitusnäkymään, josta on mahdollista siirtyä luomaan kaappi
 * Vaatekaapissa voi muokata vaatteen tietoja kuten vaatteen likaisuutta ja ehjyyttä
 * Vaatekaapista voi poistaa vaatteen
 * Vaatekaapista voi selvittää vaatekaappinsa kokonaisarvon
-* Voi hakea määrän kuinka monet housut esimerkiksi omistaa.
+
 
 
 ## Jatkokehitysideoita
 
+* Voisi hakea määrän kuinka monet housut esimerkiksi omistaa.
 * Voisi järjestellä vaatteita suoraan sovelluksesta ilman, että tarvitsee poistaa vaate aina ja lisätä uudestaan
 * Voisi lisätä useille eri käyttäjille omat vaatekaapit
 * Voisi kertoa kaapille montako hyllyä omassa kaapissa on ja montako vaatetta mahtuu/hylly
