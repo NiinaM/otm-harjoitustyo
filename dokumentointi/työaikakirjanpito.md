@@ -15,4 +15,6 @@
 | 24.04 | 2 | Luin mitä pitää tehdä ja mietin, että mistä aloittaisin ja miten aloittaisin käyttöliittymää |
 | 25.04 | 3 | Opettelin käyttöliittymän koodin tekoa ja kirjoitin sitä vähän. Sen lisäksi tein sekvenssikaavio, siistin repoa |
 | 02.05 | 0,5 | Muokkasin käyttöliittymän koodia luomalla kaksi uutta metodia |
-| yht | 29,5 | |
+| 10.05 | 13h | Muokkasin käyttöliittymää, sovelluslogiikka ja tein suunnitelman käyttöliittymälle |
+| 11.05 | 14h | Muokkasin käyttöliittymää, tein testejä, tein dokumentaatiota, tein daot, sovelluslogiikkaa |
+| yht | 56,5h | |
