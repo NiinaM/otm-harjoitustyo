@@ -7,7 +7,9 @@ Sovelluksella on vain yksi käyttäjä kerrallaan. Vaatekaappiin voi lisätä va
 
 ## Käyttöliittymäluonnos
 (Tekstiä)
+
 (Kuva)
+
 (Tekstiä)
 
 ## Perusversion tarjoama toiminnallisuus
