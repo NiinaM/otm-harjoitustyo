@@ -16,6 +16,7 @@ Sovellus, jolla voi hallita vaatekaapin sisältöä.
 ## Releaset
 
 [Viikko 5](https://github.com/NiinaM/otm-harjoitustyo/releases/tag/viikko5)
+
 [Loppupalautus](https://github.com/NiinaM/otm-harjoitustyo/releases/tag/Loppupalautus)
 
 ## Komentorivitoiminnot
