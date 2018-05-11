@@ -29,12 +29,13 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     Button buttonCreatesCloset;
     Button buttonIsThereAnyDirtyItems;
     Button buttonIsThereAnyBrokenItems;
+    Button buttonTakesClothesOfTheShelf;
+    Button buttonValueOfTheClothesInCloset;
     TextField textFieldTheOwnersName;
     int shelfNumber;
     String choocedClothingFromDropDownInShelf;
     ChoiceBox<Integer> choiceBoxShelves;
-    ChoiceBox<String> choiceBoxClothes;
-    Label answer;
+    ChoiceBox<String> choiceBoxClothes;;
 
     Stage window;
     Scene sceneStart, sceneClosetCreation, sceneClothingCreation, sceneCloset;
@@ -103,6 +104,10 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
         buttonIsThereAnyBrokenItems.setText("Onko yhtään rikkinäisiä vaatteita");
         buttonIsThereAnyBrokenItems.setOnAction(this);
 
+        buttonValueOfTheClothesInCloset = new Button();
+        buttonValueOfTheClothesInCloset.setText("Vaatteiden kokonaisarvo");
+        buttonValueOfTheClothesInCloset.setOnAction(this);
+        
         buttonBringsBackToStart = new Button();
         buttonBringsBackToStart.setText("Siirry alkunäkymään");
         buttonBringsBackToStart.setOnAction(this);
@@ -131,11 +136,17 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
         buttonPicksTheClothingFromDropDown = new Button();
         buttonPicksTheClothingFromDropDown.setText("Valitse vaate");
         buttonPicksTheClothingFromDropDown.setOnAction(this);
-
+        
+        buttonTakesClothesOfTheShelf = new Button();
+        buttonTakesClothesOfTheShelf.setText("Tyhjennä hylly");
+        buttonTakesClothesOfTheShelf.setOnAction(this);
+        
+        
+        
         VBox vbox = new VBox();
         vbox.setSpacing(10);
 
-        vbox.getChildren().addAll(label, choices, choiceBoxClothes, buttonPicksTheClothingFromDropDown);
+        vbox.getChildren().addAll(label, choices, choiceBoxClothes, buttonPicksTheClothingFromDropDown, buttonTakesClothesOfTheShelf);
         StackPane layout = new StackPane(vbox);
 
         return new Scene(layout, 400, 150);
@@ -143,7 +154,7 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
 
     public Scene createClothingScene() {
         Label label = new Label("Vaate: " + this.choocedClothingFromDropDownInShelf);
-
+        //vaatteen poisto ja lisäys
         VBox vbox = new VBox();
         vbox.setSpacing(10);
 
@@ -244,23 +255,31 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
             //En ole nyt varma toimiiko nämä oikein?
             window.setScene(sceneCloset);
         }
-
+        //onko alla olevissa ylitetty se raja sovelluslogiikan kanssa, miten tollanen vastauksen tulostaminen pitäs toteuttaa?
         if (event.getSource() == buttonIsThereAnyDirtyItems) {
             if (closet.isThereAnyDirtyItems()) {
-                answer = new Label("On likaisia vaatteita.");
+                System.out.println("On likaisia vaatteita.");
             } else {
-                answer = new Label("Ei ole likaisia vaatteita.");
+                System.out.println("Ei ole likaisia vaatteita.");
             }
         }
 
         if (event.getSource() == buttonIsThereAnyBrokenItems) {
             if (closet.isThereAnyBrokenItems()) {
-                answer = new Label("On rikkinäisiä vaatteita.");
+                System.out.println("On rikkinäisiä vaatteita.");
             } else {
-                answer = new Label("Ei ole rikkinäisiä vaatteita.");
+                System.out.println("Ei ole rikkinäisiä vaatteita.");
             }
         }
 
+        if (event.getSource() == buttonTakesClothesOfTheShelf) {
+            closet.getShelves().get(shelfNumber).emptyShelf();
+        }
+        
+        if (event.getSource() == buttonValueOfTheClothesInCloset) {
+            System.out.println(Integer.toString(closet.valueOfAllTheItemsInCloset()));
+        }
+        
     }
 
     private void getShelf(ChoiceBox<Integer> choiceBox) {
