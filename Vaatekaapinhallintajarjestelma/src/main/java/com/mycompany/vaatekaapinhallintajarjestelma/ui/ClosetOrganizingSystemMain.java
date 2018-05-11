@@ -16,6 +16,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class ClosetOrganizingSystemMain extends Application implements EventHandler<ActionEvent> {
 
@@ -86,7 +87,8 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     public Scene createClosetScene() {
         //puuttuu kaikenlaista vielä
         Label label = new Label("Kaappi");
-
+        
+        Label choices = new Label("Hyllyvalikko");
         choiceBox1 = new ChoiceBox<>();
         //kaapissa on aina 5 hyllyä
         choiceBox1.getItems().addAll(1, 2, 3, 4, 5);
@@ -96,13 +98,13 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
         button7.setOnAction(this);
 
         button6 = new Button();
-        button6.setText("Takaisin alkuun");
+        button6.setText("Siirry alkunäkymään");
         button6.setOnAction(this);
 
         VBox vbox = new VBox();
         vbox.setSpacing(10);
 
-        vbox.getChildren().addAll(label, choiceBox1, button7, button6);
+        vbox.getChildren().addAll(label, choices, choiceBox1, button7, button6);
         StackPane layout = new StackPane(vbox);
 
         return new Scene(layout, 400, 150);
@@ -111,7 +113,8 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     public Scene createSheflScene() {
         //kesken
         Label label = new Label("Hylly " + this.shelfNumber);
-
+        
+        Label choices = new Label("Vaatevalikko");
         choiceBox2 = new ChoiceBox<>();
         ArrayList<Clothing> clothes = this.closet.getShelves().get(shelfNumber - 1).getClothes();
         for (int i = 0; i < clothes.size(); i++) {
@@ -126,7 +129,7 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
         VBox vbox = new VBox();
         vbox.setSpacing(10);
 
-        vbox.getChildren().addAll(label, choiceBox2, button8);
+        vbox.getChildren().addAll(label, choices, choiceBox2, button8);
         StackPane layout = new StackPane(vbox);
 
         return new Scene(layout, 400, 150);
@@ -161,7 +164,7 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
         VBox vbox = new VBox();
         vbox.setSpacing(10);
 
-        vbox.getChildren().addAll(label, textField, button9, button3);
+        vbox.getChildren().addAll(label, kaapinOmistaja, textField, button9, button3);
         StackPane layout = new StackPane(vbox);
 
         return new Scene(layout, 400, 150);
