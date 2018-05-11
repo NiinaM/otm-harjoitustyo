@@ -72,15 +72,18 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        try {
+            closet = new Closet("", new FileShelfDao("vaatteet.txt"));
+            this.window = primaryStage;
+            this.window.setTitle("Vaatekaapinhallintajärjestelmä");
+            sceneStart = this.createStartScene();
+            sceneCloset = this.createClosetScene();
 
-        closet = new Closet("", new FileShelfDao("vaatteet.txt"));
-        this.window = primaryStage;
-        this.window.setTitle("Vaatekaapinhallintajärjestelmä");
-        sceneStart = this.createStartScene();
-        sceneCloset = this.createClosetScene();
-
-        this.window.setScene(sceneStart);
-        this.window.show();
+            this.window.setScene(sceneStart);
+            this.window.show();
+        } catch (Exception e){
+            window.setScene(this.createErrorScene());
+        }
     }
 
     public Scene createStartScene() {
@@ -324,6 +327,18 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
         StackPane layout = new StackPane(vbox);
 
         return new Scene(layout, 400, 700);
+    }
+
+    private Scene createErrorScene() {
+        Label label = new Label("Voi ei! Tapahtui vakava virhe!");
+
+        VBox vbox = new VBox();
+        vbox.setSpacing(10);
+
+        vbox.getChildren().addAll(label);
+        StackPane layout = new StackPane(vbox);
+
+        return new Scene(layout, 400, 150);
     }
 
     @Override
