@@ -68,14 +68,6 @@ public class Clothing {
         this.howDirty = howDirty;
     }
 
-    public void setColor(ColorsEnum color) {
-        this.color = color;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     @Override
     public String toString() {
         return "Vaate " + this.name + " on " + this.size + "-kokoinen ja " + this.sizeInInches + "-kokoinen. Sen väri on " + this.color + " ja se on " + this.type;

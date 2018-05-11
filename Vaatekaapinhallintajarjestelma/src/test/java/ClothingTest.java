@@ -88,18 +88,6 @@ public class ClothingTest {
         clothing.setHowDirty(IsItLaundryEnum.LIKAINEN);
         assertEquals(IsItLaundryEnum.LIKAINEN, clothing.getHowDirty());
     }
-
-    @Test
-    public void setColorWorks() {
-        clothing.setColor(ColorsEnum.MUSTA);
-        assertEquals(ColorsEnum.MUSTA, clothing.getColor());
-    }
-
-    @Test
-    public void setPriceWorks() {
-        clothing.setPrice(40);
-        assertEquals(40, clothing.getPrice());
-    }
     
     @Test
     public void toStringWorks() {

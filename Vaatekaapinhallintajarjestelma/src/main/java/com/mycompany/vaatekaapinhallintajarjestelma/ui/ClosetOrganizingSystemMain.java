@@ -11,35 +11,33 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.event.Event;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 public class ClosetOrganizingSystemMain extends Application implements EventHandler<ActionEvent> {
 
     Closet closet;
-    Button button1;
-    Button button2;
-    Button button3;
-    Button button4;
-    Button button5;
-    Button button6;
-    Button button7;
-    Button button8;
-    Button button9;
-
-    String clothingName;
-    TextField textField;
+    Button buttonLeadsToCreateCloset;
+    Button buttonLeadsToCreateClothing;
+    Button buttonBringsBackToStart;
+    Button buttonCreateClothing;
+    Button buttonBringsToCloset;
+    Button buttonPicksTheShelfFromDropDown;
+    Button buttonPicksTheClothingFromDropDown;
+    Button buttonCreatesCloset;
+    Button buttonIsThereAnyDirtyItems;
+    Button buttonIsThereAnyBrokenItems;
+    TextField textFieldTheOwnersName;
     int shelfNumber;
-    String clothing;
-    ChoiceBox<Integer> choiceBox1;
-    ChoiceBox<String> choiceBox2;
+    String choocedClothingFromDropDownInShelf;
+    ChoiceBox<Integer> choiceBoxShelves;
+    ChoiceBox<String> choiceBoxClothes;
+    Label answer;
 
     Stage window;
-    Scene scene1, scene2, scene3, scene4, scene5;
+    Scene sceneStart, sceneClosetCreation, sceneClothingCreation, sceneCloset;
 
     public static void main(String[] args) {
         launch(args);
@@ -51,33 +49,33 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
 
         this.window = primaryStage;
         this.window.setTitle("Vaatekaapinhallintajärjestelmä");
-        scene1 = this.createStartScene();
-        scene2 = this.creatClosetCreationScene();
-        scene3 = this.creatClothingCreationScene();
-        scene4 = this.createClosetScene();
+        sceneStart = this.createStartScene();
+        sceneClosetCreation = this.createClosetCreationScene();
+        sceneClothingCreation = this.creatClothingCreationScene();
+        sceneCloset = this.createClosetScene();
 
-        this.window.setScene(scene1);
+        this.window.setScene(sceneStart);
         this.window.show();
     }
 
     public Scene createStartScene() {
 
-        button1 = new Button();
-        button1.setText("Luo kaappi");
-        button1.setOnAction(this);
+        buttonLeadsToCreateCloset = new Button();
+        buttonLeadsToCreateCloset.setText("Luo kaappi");
+        buttonLeadsToCreateCloset.setOnAction(this);
 
-        button2 = new Button();
-        button2.setText("Luo Vaate");
-        button2.setOnAction(this);
+        buttonLeadsToCreateClothing = new Button();
+        buttonLeadsToCreateClothing.setText("Luo Vaate");
+        buttonLeadsToCreateClothing.setOnAction(this);
 
-        button5 = new Button();
-        button5.setText("Kaappiin");
-        button5.setOnAction(this);
+        buttonBringsToCloset = new Button();
+        buttonBringsToCloset.setText("Kaappiin");
+        buttonBringsToCloset.setOnAction(this);
 
         VBox vbox = new VBox();
         vbox.setSpacing(10);
 
-        vbox.getChildren().addAll(button1, button2, button5);
+        vbox.getChildren().addAll(buttonLeadsToCreateCloset, buttonLeadsToCreateClothing, buttonBringsToCloset);
         StackPane layout = new StackPane(vbox);
 
         return new Scene(layout, 400, 150);
@@ -87,56 +85,64 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     public Scene createClosetScene() {
         //puuttuu kaikenlaista vielä
         Label label = new Label("Kaappi");
-        
+
         Label choices = new Label("Hyllyvalikko");
-        choiceBox1 = new ChoiceBox<>();
+        choiceBoxShelves = new ChoiceBox<>();
         //kaapissa on aina 5 hyllyä
-        choiceBox1.getItems().addAll(1, 2, 3, 4, 5);
+        choiceBoxShelves.getItems().addAll(1, 2, 3, 4, 5);
 
-        button7 = new Button();
-        button7.setText("valitse hylly");
-        button7.setOnAction(this);
+        buttonPicksTheShelfFromDropDown = new Button();
+        buttonPicksTheShelfFromDropDown.setText("valitse hylly");
+        buttonPicksTheShelfFromDropDown.setOnAction(this);
 
-        button6 = new Button();
-        button6.setText("Siirry alkunäkymään");
-        button6.setOnAction(this);
+        buttonIsThereAnyDirtyItems = new Button();
+        buttonIsThereAnyDirtyItems.setText("Onko yhtään likaista vaatetta");
+        buttonIsThereAnyDirtyItems.setOnAction(this);
+
+        buttonIsThereAnyBrokenItems = new Button();
+        buttonIsThereAnyBrokenItems.setText("Onko yhtään rikkinäisiä vaatteita");
+        buttonIsThereAnyBrokenItems.setOnAction(this);
+
+        buttonBringsBackToStart = new Button();
+        buttonBringsBackToStart.setText("Siirry alkunäkymään");
+        buttonBringsBackToStart.setOnAction(this);
 
         VBox vbox = new VBox();
         vbox.setSpacing(10);
 
-        vbox.getChildren().addAll(label, choices, choiceBox1, button7, button6);
+        vbox.getChildren().addAll(label, choices, choiceBoxShelves, buttonPicksTheShelfFromDropDown, buttonIsThereAnyDirtyItems, buttonIsThereAnyBrokenItems, buttonBringsBackToStart);
         StackPane layout = new StackPane(vbox);
 
-        return new Scene(layout, 400, 150);
+        return new Scene(layout, 400, 400);
     }
 
     public Scene createSheflScene() {
         //kesken
         Label label = new Label("Hylly " + this.shelfNumber);
-        
+
         Label choices = new Label("Vaatevalikko");
-        choiceBox2 = new ChoiceBox<>();
+        choiceBoxClothes = new ChoiceBox<>();
         ArrayList<Clothing> clothes = this.closet.getShelves().get(shelfNumber - 1).getClothes();
         for (int i = 0; i < clothes.size(); i++) {
             String clothingName = clothes.get(i).getName();
-            choiceBox2.getItems().add(clothingName);
+            choiceBoxClothes.getItems().add(clothingName);
         }
 
-        button8 = new Button();
-        button8.setText("Valitse vaate");
-        button8.setOnAction(this);
+        buttonPicksTheClothingFromDropDown = new Button();
+        buttonPicksTheClothingFromDropDown.setText("Valitse vaate");
+        buttonPicksTheClothingFromDropDown.setOnAction(this);
 
         VBox vbox = new VBox();
         vbox.setSpacing(10);
 
-        vbox.getChildren().addAll(label, choices, choiceBox2, button8);
+        vbox.getChildren().addAll(label, choices, choiceBoxClothes, buttonPicksTheClothingFromDropDown);
         StackPane layout = new StackPane(vbox);
 
         return new Scene(layout, 400, 150);
     }
 
     public Scene createClothingScene() {
-        Label label = new Label("Vaate: " + this.clothing);
+        Label label = new Label("Vaate: " + this.choocedClothingFromDropDownInShelf);
 
         VBox vbox = new VBox();
         vbox.setSpacing(10);
@@ -147,24 +153,25 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
         return new Scene(layout, 400, 150);
     }
 
-    public Scene creatClosetCreationScene() {
+    public Scene createClosetCreationScene() {
+
         Label label = new Label("Täällä voit luoda kaapin.");
 
         Label kaapinOmistaja = new Label("Omistajan nimi");
-        textField = new TextField();
+        textFieldTheOwnersName = new TextField();
 
-        button9 = new Button();
-        button9.setText("Luo kaappi");
-        button9.setOnAction(this);
+        buttonCreatesCloset = new Button();
+        buttonCreatesCloset.setText("Luo kaappi");
+        buttonCreatesCloset.setOnAction(this);
 
-        button3 = new Button();
-        button3.setText("Siirry alkunäkymään");
-        button3.setOnAction(this);
+        buttonBringsBackToStart = new Button();
+        buttonBringsBackToStart.setText("Siirry alkunäkymään");
+        buttonBringsBackToStart.setOnAction(this);
 
         VBox vbox = new VBox();
         vbox.setSpacing(10);
 
-        vbox.getChildren().addAll(label, kaapinOmistaja, textField, button9, button3);
+        vbox.getChildren().addAll(label, kaapinOmistaja, textFieldTheOwnersName, buttonCreatesCloset, buttonBringsBackToStart);
         StackPane layout = new StackPane(vbox);
 
         return new Scene(layout, 400, 150);
@@ -175,19 +182,19 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
         Label label = new Label("Täällä voit luoda vaatteen ja lisätä sen hyllyyn.");
         Label nameClothing = new Label("Vaate");
         TextField name = new TextField();
-        clothingName = name.getText();
-        
-        
-        
-        
-        button4 = new Button();
-        button4.setText("Luo vaate");
-        button4.setOnAction(this);
+
+        buttonCreateClothing = new Button();
+        buttonCreateClothing.setText("Luo vaate");
+        buttonCreateClothing.setOnAction(this);
+
+        buttonBringsBackToStart = new Button();
+        buttonBringsBackToStart.setText("Siirry alkunäkymään");
+        buttonBringsBackToStart.setOnAction(this);
 
         VBox vbox = new VBox();
         vbox.setSpacing(10);
 
-        vbox.getChildren().addAll(label, nameClothing, name, button4);
+        vbox.getChildren().addAll(label, nameClothing, name, buttonCreateClothing, buttonBringsBackToStart);
         StackPane layout = new StackPane(vbox);
 
         return new Scene(layout, 400, 150);
@@ -196,52 +203,64 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     @Override
     public void handle(ActionEvent event) {
 
-        if (event.getSource() == button1) {
+        if (event.getSource() == buttonLeadsToCreateCloset) {
             //siirtää kaapin luomis ruutuun
-            window.setScene(scene2);
+            window.setScene(sceneClosetCreation);
         }
 
-        if (event.getSource() == button2) {
+        if (event.getSource() == buttonLeadsToCreateClothing) {
             //siirtää vaatteen luomisruutuun
-            window.setScene(scene3);
+            window.setScene(sceneClothingCreation);
         }
 
-        if (event.getSource() == button3) {
+        if (event.getSource() == buttonBringsBackToStart) {
             //palautus alkuruutuun
-            window.setScene(scene1);
+            window.setScene(sceneStart);
         }
 
-        if (event.getSource() == button4) {
+        if (event.getSource() == buttonCreateClothing) {
             //vaatteen luonti
-            //palautus alkuruutuun
             window.setScene(this.createClothingScene());
         }
 
-        if (event.getSource() == button5) {
+        if (event.getSource() == buttonBringsToCloset) {
             //siirtää kaappi ruutuun
-            window.setScene(scene4);
+            window.setScene(sceneCloset);
         }
 
-        if (event.getSource() == button6) {
-            //siirtää takaisin alkuruutuun
-            window.setScene(scene1);
-        }
-
-        if (event.getSource() == button7) {
+        if (event.getSource() == buttonPicksTheShelfFromDropDown) {
             //hyllyjen pudotusvalikon nappi
-            this.getShelf(choiceBox1);
+            this.getShelf(choiceBoxShelves);
         }
 
-        if (event.getSource() == button8) {
-            //vaatteiden pudotusvalikko
-            this.getClothing(choiceBox2);
+        if (event.getSource() == buttonPicksTheClothingFromDropDown) {
+            //vaatteiden pudotusvalikon nappi
+            this.getClothing(choiceBoxClothes);
         }
 
-        if (event.getSource() == button9) {
-            //vaatteen valitseminen
-            closet = new Closet(this.textField.getText());
-            window.setScene(this.createClothingScene());
+        if (event.getSource() == buttonCreatesCloset) {
+            //kaapin luominen jokin ongelma valittaa null pointer exception?
+            closet = new Closet(textFieldTheOwnersName.getText());
+            //En ole nyt varma toimiiko nämä oikein?
+            window.setScene(sceneCloset);
         }
+
+        if (event.getSource() == buttonIsThereAnyDirtyItems) {
+            if (closet.isThereAnyDirtyItems()) {
+                answer = new Label("On likaisia vaatteita.");
+            } else {
+                answer = new Label("Ei ole likaisia vaatteita.");
+            }
+        }
+
+        if (event.getSource() == buttonIsThereAnyBrokenItems) {
+            if (closet.isThereAnyBrokenItems()) {
+                answer = new Label("On rikkinäisiä vaatteita.");
+            } else {
+                answer = new Label("Ei ole rikkinäisiä vaatteita.");
+            }
+        }
+
     }
 
     private void getShelf(ChoiceBox<Integer> choiceBox) {
@@ -250,7 +269,7 @@ public class ClosetOrganizingSystemMain extends Application implements EventHand
     }
 
     private void getClothing(ChoiceBox<String> choiceBox) {
-        clothing = choiceBox.getValue();
+        choocedClothingFromDropDownInShelf = choiceBox.getValue();
         window.setScene(this.createClothingScene());
 
     }

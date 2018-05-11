@@ -9,17 +9,13 @@ public class Closet {
 
     public Closet(String name) {
         this.owner = name;
-        this.shelves = new ArrayList<>();
-        this.makeShelves();
-    }
-    //kaapissa on aina viisi hyllyä
-    public void makeShelves() {
-        for (int i = 0; i <= 5; i++) {
+        //Hyllyjen luonti on ongelma?
+        for (int i = 0; i < 5; i++) {
             Shelf shelf = new Shelf();
             this.shelves.add(shelf);
         }
     }
-    
+
     public String getOwner() {
         return owner;
     }

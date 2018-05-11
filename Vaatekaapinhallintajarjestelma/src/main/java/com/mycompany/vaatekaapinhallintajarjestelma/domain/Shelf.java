@@ -14,33 +14,33 @@ public class Shelf {
         return clothes;
     }
     
-    public String addClothing(Clothing clothing) {
-        if (this.clothes.size() <= 20) {
+    public Boolean addClothing(Clothing clothing) {
+        if (this.clothes.size() < 20) {
             this.clothes.add(clothing);
-            return "Vaatteen asetus onnistui!";
+            return true;
         } else {
-            return "Hylly on täynnä aseta toiselle hyllylle!";
+            return false;
         }
         
     }
 
-    public void removeClothing(Clothing clothing) {
+    public Boolean removeClothing(Clothing clothing) {
         for (int i = 0; i < this.clothes.size(); i++) {
             if (this.clothes.get(i).getName().equals(clothing.getName())) {
                 this.clothes.remove(i);
+                return true;
             }
         }
+        return false;
     }
-
     public void emptyShelf() {
         this.clothes.removeAll(clothes);
     }
 
     public int valueOfAllTheItemsOnShelf() {
         int price = 0;
-
         for (int i = 0; i < this.clothes.size(); i++) {
-            price = +this.clothes.get(i).getPrice();
+            price += this.clothes.get(i).getPrice();
         }
         return price;
     }
@@ -76,5 +76,17 @@ public class Shelf {
             }
         }
         return howMany;
+    }
+    
+    public void repair(Clothing clothing) {
+        if (clothing.getCondition().equals(ConditionEnum.RIKKI)) {
+            clothing.setCondition(ConditionEnum.EHJA);
+        }
+    }
+    
+    public void wash(Clothing clothing) {
+        if (clothing.getCondition().equals(IsItLaundryEnum.LIKAINEN)) {
+            clothing.setHowDirty(IsItLaundryEnum.PUHDAS);
+        }
     }
 }

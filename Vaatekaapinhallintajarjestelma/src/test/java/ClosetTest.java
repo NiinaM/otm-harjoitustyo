@@ -5,6 +5,7 @@ import com.mycompany.vaatekaapinhallintajarjestelma.domain.ColorsEnum;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.ConditionEnum;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.IsItLaundryEnum;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.MaterialsEnum;
+import com.mycompany.vaatekaapinhallintajarjestelma.domain.Shelf;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.SizeEnum;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.TypeEnum;
 import org.junit.After;
@@ -17,6 +18,7 @@ import static org.junit.Assert.*;
 public class ClosetTest {
 
     Closet closet;
+    Shelf shelf;
     Clothing clothing;
 
     public ClosetTest() {
@@ -47,6 +49,7 @@ public class ClosetTest {
 
     @Test
     public void valueOfTheClothesInClosetIsRight() {
+        closet.getShelves().get(0).addClothing(clothing);
         assertEquals(50, closet.valueOfAllTheItemsInCloset());
     }
 
