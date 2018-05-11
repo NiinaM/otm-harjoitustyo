@@ -45,7 +45,7 @@ Kuvataan seuraavaksi sovelluksen toimintalogiikkaa yhden päätoiminnallisuuden 
 <img src="https://github.com/NiinaM/otm-harjoitustyo/blob/master/dokumentointi/kuvat/Sekvenssikaavio%20vaate%20vaatekaappiin.jpg" width="700">
 
 ## Ohjelman rakenteeseen jääneet heikkoudet
-Ohjelma kaatuu, kun yrittää tarkastella vaatetta, vaikkei se saisi kaatua.
+Koko koodi on aika epäselvää ja varsinkin käyttöliittymän koodi.
 
 
 
