@@ -44,6 +44,16 @@ mvn package
 
 generoi hakemistoon _target_ suoritettavan jar-tiedoston _VaatekaapinHallintajarjestelma-1.0-SNAPSHOT.jar_
 
+### JavaDoc
+
+JavaDoc generoidaan komennolla
+
+```
+mvn javadoc:javadoc
+```
+
+JavaDocia voi tarkastella avaamalla selaimella tiedosto target/site/apidocs/index.html
+
 ### Checkstyle
 
 Tiedostoon [checkstyle.xml](https://github.com/NiinaM/otm-harjoitustyo/blob/master/Vaatekaapinhallintajarjestelma/checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla
