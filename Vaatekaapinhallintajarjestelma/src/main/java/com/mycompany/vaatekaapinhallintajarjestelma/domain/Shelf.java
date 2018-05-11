@@ -2,18 +2,47 @@ package com.mycompany.vaatekaapinhallintajarjestelma.domain;
 
 import java.util.ArrayList;
 
+/**
+ * Class creates a shelf object and provides methods to maintain the clothes
+ * that are on the shelf
+ */
 public class Shelf {
 
     private ArrayList<Clothing> clothes;
+    private int shelfNumber;
 
-    public Shelf() {
+    /**
+     * Method that Constructs a shelf object
+     */
+    public Shelf(int shelfNumber) {
         this.clothes = new ArrayList<>();
+        this.shelfNumber = shelfNumber;
+    }
+    
+    public Shelf(int shelfNumber, ArrayList<Clothing> list) {
+        this.clothes = list;
+        this.shelfNumber = shelfNumber;
     }
 
+    /**
+     * Method that returns a ArrayList of all the clothes on the shelf
+     * 
+     * @return ArrayList that has all the clothes on the shelf
+     */
     public ArrayList<Clothing> getClothes() {
         return clothes;
     }
-    
+
+    public int getShelfNumber() {
+        return shelfNumber;
+    }
+
+    /**
+     * Method adds clothing on the shelf to the ArrayList clothes until it has 20 clothes
+     * 
+     * @param clothing
+     * @return Boolean false if there are already 20 clothes on the shelf and true if there is still space
+     */
     public Boolean addClothing(Clothing clothing) {
         if (this.clothes.size() < 20) {
             this.clothes.add(clothing);
@@ -21,9 +50,15 @@ public class Shelf {
         } else {
             return false;
         }
-        
+
     }
 
+    /**
+     * Method removes the clothing that is given as parameter from the ArrayList clothes
+     * 
+     * @param clothing
+     * @return Boolean true if the clothing was removed and false if it was not
+     */
     public Boolean removeClothing(Clothing clothing) {
         for (int i = 0; i < this.clothes.size(); i++) {
             if (this.clothes.get(i).getName().equals(clothing.getName())) {
@@ -33,10 +68,19 @@ public class Shelf {
         }
         return false;
     }
+
+    /**
+     * Method empties the ArrayList chlothes 
+     */
     public void emptyShelf() {
         this.clothes.removeAll(clothes);
     }
 
+    /**
+     * Method counts value of all the clothes on the shelf
+     * 
+     * @return Integer that is the value of all the clothes on shelf
+     */
     public int valueOfAllTheItemsOnShelf() {
         int price = 0;
         for (int i = 0; i < this.clothes.size(); i++) {
@@ -45,6 +89,11 @@ public class Shelf {
         return price;
     }
 
+    /**
+     * Method counts the amount of broken items on the shelf
+     * 
+     * @return Integer that is the amount of broken items on the shelf
+     */
     public int howManyBrokenItemsOnShelf() {
         int howMany = 0;
 
@@ -56,6 +105,11 @@ public class Shelf {
         return howMany;
     }
 
+    /**
+     * Method counts the amount of dirty items on the shelf
+     * 
+     * @return Integer that is the amount of dirty items on the shelf
+     */
     public int howManyDirtyItemsOnShelf() {
         int howMany = 0;
 
@@ -65,28 +119,5 @@ public class Shelf {
             }
         }
         return howMany;
-    }
-
-    public int howManyOfTheseItemsOnShelf(TypeEnum type) {
-        int howMany = 0;
-
-        for (int i = 0; i < this.clothes.size(); i++) {
-            if (this.clothes.get(i).getType().equals(type)) {
-                howMany++;
-            }
-        }
-        return howMany;
-    }
-    
-    public void repair(Clothing clothing) {
-        if (clothing.getCondition().equals(ConditionEnum.RIKKI)) {
-            clothing.setCondition(ConditionEnum.EHJA);
-        }
-    }
-    
-    public void wash(Clothing clothing) {
-        if (clothing.getCondition().equals(IsItLaundryEnum.LIKAINEN)) {
-            clothing.setHowDirty(IsItLaundryEnum.PUHDAS);
-        }
     }
 }

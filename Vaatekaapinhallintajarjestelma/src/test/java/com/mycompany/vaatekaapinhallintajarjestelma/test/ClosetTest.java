@@ -1,4 +1,7 @@
+package com.mycompany.vaatekaapinhallintajarjestelma.test;
 
+
+import com.mycompany.vaatekaapinhallintajarjestelma.dao.TestShelfDao;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.Clothing;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.Closet;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.ColorsEnum;
@@ -34,8 +37,9 @@ public class ClosetTest {
 
     @Before
     public void setUp() {
-        closet = new Closet("Niina");
+        closet = new Closet("Niina", new TestShelfDao());
         clothing = new Clothing("kiva", ColorsEnum.PUNAINEN, ConditionEnum.EHJA, 32, SizeEnum.XSMALL, TypeEnum.HOUSUT, IsItLaundryEnum.PUHDAS, 50, MaterialsEnum.AKRYYLI);
+        closet.getShelves().get(0).addClothing(clothing);
     }
 
     @After
@@ -48,8 +52,12 @@ public class ClosetTest {
     }
 
     @Test
+    public void thereAreRigthAmountOfShelves() {
+        assertEquals(5, closet.getShelves().size());
+    }
+
+    @Test
     public void valueOfTheClothesInClosetIsRight() {
-        closet.getShelves().get(0).addClothing(clothing);
         assertEquals(50, closet.valueOfAllTheItemsInCloset());
     }
 
@@ -57,7 +65,7 @@ public class ClosetTest {
     public void isThereAnyBrokenItemsWhenThereIsNone() {
         assertEquals(false, closet.isThereAnyBrokenItems());
     }
-    
+
     @Test
     public void isThereAnyBrokenItemsWhenThereIsOne() {
         clothing.setCondition(ConditionEnum.RIKKI);
@@ -74,11 +82,7 @@ public class ClosetTest {
         clothing.setHowDirty(IsItLaundryEnum.LIKAINEN);
         assertEquals(true, closet.isThereAnyDirtyItems());
     }
-    
-    @Test
-    public void howManyOfTheseItemsInClosetReturnsRightNumber() {
-        assertEquals(1, closet.howManyOfTheseItemsInCloset(TypeEnum.HOUSUT));
-    }
+
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //

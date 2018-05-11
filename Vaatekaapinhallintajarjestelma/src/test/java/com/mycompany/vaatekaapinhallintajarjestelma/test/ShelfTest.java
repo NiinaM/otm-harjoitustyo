@@ -1,3 +1,5 @@
+package com.mycompany.vaatekaapinhallintajarjestelma.test;
+
 
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.Clothing;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.ColorsEnum;
@@ -32,8 +34,9 @@ public class ShelfTest {
 
     @Before
     public void setUp() {
-        shelf = new Shelf();
+        shelf = new Shelf(1);
         clothing = new Clothing("kiva", ColorsEnum.PUNAINEN, ConditionEnum.EHJA, 32, SizeEnum.XSMALL, TypeEnum.HOUSUT, IsItLaundryEnum.PUHDAS, 50, MaterialsEnum.AKRYYLI);
+        shelf.addClothing(clothing);
     }
 
     @After
@@ -42,13 +45,12 @@ public class ShelfTest {
 
     @Test
     public void addClothingAddsClothingWhenThereIsSpace() {
-        shelf.addClothing(clothing);
         assertEquals("kiva", shelf.getClothes().get(0).getName());
     }
 
     @Test
     public void addClothingDoesntAddWhenShelfIsFull() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 19; i++) {
             shelf.addClothing(clothing);
         }
         assertFalse(shelf.addClothing(clothing));
@@ -56,31 +58,35 @@ public class ShelfTest {
 
     @Test
     public void removesClothingThatIsThere() {
-        shelf.addClothing(clothing);
         assertTrue(shelf.removeClothing(clothing));
     }
 
     @Test
-    public void doesntRemoveClothingWhenThereIsNotTheClothing() {
-        assertFalse(shelf.removeClothing(clothing));
+    public void doesntRemoveClothingWhenThereIsNoClothes() {
+        Shelf shelf2 = new Shelf(1);
+        assertFalse(shelf2.removeClothing(clothing));
+    }
+    
+    @Test
+    public void removeClothingWhenThereIsNoClothes() {
+        Clothing clothing2 = new Clothing("Hulli", ColorsEnum.PUNAINEN, ConditionEnum.EHJA, 32, SizeEnum.XSMALL, TypeEnum.HOUSUT, IsItLaundryEnum.PUHDAS, 50, MaterialsEnum.AKRYYLI);
+        assertFalse(shelf.removeClothing(clothing2));
+        
     }
 
     @Test
     public void emptiesTheShelf() {
-        shelf.addClothing(clothing);
         shelf.emptyShelf();
         assertTrue(shelf.getClothes().isEmpty());
     }
 
     @Test
     public void valueOfTheClothesInShelftIsRight() {
-        shelf.addClothing(clothing);
         assertEquals(50, shelf.valueOfAllTheItemsOnShelf());
     }
 
     @Test
     public void valueOfTheClothesInShelftIsRightWhenMoreItems() {
-        shelf.addClothing(clothing);
         shelf.addClothing(clothing);
         assertEquals(100, shelf.valueOfAllTheItemsOnShelf());
     }
@@ -88,74 +94,27 @@ public class ShelfTest {
     @Test
     public void howManyBrokenItemsOnTheShelfWorksWhenThereIsOne() {
         clothing.setCondition(ConditionEnum.RIKKI);
-        shelf.addClothing(clothing);
         assertEquals(1, shelf.howManyBrokenItemsOnShelf());
     }
 
     @Test
     public void howManyBrokenItemsOnTheShelfWorksWhenThereIsNone() {
         clothing.setCondition(ConditionEnum.EHJA);
-        shelf.addClothing(clothing);
         assertEquals(0, shelf.howManyBrokenItemsOnShelf());
     }
 
     @Test
     public void howManyDirtyItemsOnShelfWorksWhenThereIsOne() {
         clothing.setHowDirty(IsItLaundryEnum.LIKAINEN);
-        shelf.addClothing(clothing);
         assertEquals(1, shelf.howManyDirtyItemsOnShelf());
     }
 
     @Test
     public void howManyDirtyItemsOnShelfWorksWhenThereIsNone() {
         clothing.setHowDirty(IsItLaundryEnum.PUHDAS);
-        shelf.addClothing(clothing);
         assertEquals(0, shelf.howManyDirtyItemsOnShelf());
     }
 
-    @Test
-    public void howManyOfTheseItemsOnTheShelfWhenThereIsTrousers() {
-        shelf.addClothing(clothing);
-        assertEquals(1, shelf.howManyOfTheseItemsOnShelf(TypeEnum.HOUSUT));
-    }
-
-    @Test
-    public void howManyOfTheseItemsOnTheShelfWhenThereIsNoneOfThisItem() {
-        shelf.addClothing(clothing);
-        assertEquals(0, shelf.howManyOfTheseItemsOnShelf(TypeEnum.HAME));
-    }
-
-    @Test
-    public void doesRepairRepairWhenBroken() {
-        clothing.setCondition(ConditionEnum.RIKKI);
-        shelf.addClothing(clothing);
-        shelf.repair(clothing);
-        assertEquals(ConditionEnum.EHJA, clothing.getCondition());
-    }
-
-    @Test
-    public void doesRepairNotRepairWhenIsNotBroken() {
-        clothing.setCondition(ConditionEnum.KULUNUT);
-        shelf.addClothing(clothing);
-        shelf.repair(clothing);
-        assertEquals(ConditionEnum.KULUNUT, clothing.getCondition());
-    }
-    
-    @Test
-    public void doesWashWashWhenDirty() {
-        clothing.setHowDirty(IsItLaundryEnum.LIKAINEN);
-        shelf.addClothing(clothing);
-        shelf.wash(clothing);
-        assertEquals(IsItLaundryEnum.PUHDAS, clothing.getHowDirty());
-    }
-    
-    @Test
-    public void doesWashNotWashWhenNotDirty() {
-        clothing.setHowDirty(IsItLaundryEnum.KAYTETTY);
-        shelf.addClothing(clothing);
-        shelf.wash(clothing);
-        assertEquals(IsItLaundryEnum.KAYTETTY, clothing.getHowDirty());
-    }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //

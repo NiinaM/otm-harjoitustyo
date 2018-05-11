@@ -1,3 +1,4 @@
+package com.mycompany.vaatekaapinhallintajarjestelma.test;
 
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.Clothing;
 import com.mycompany.vaatekaapinhallintajarjestelma.domain.ColorsEnum;
@@ -88,12 +89,35 @@ public class ClothingTest {
         clothing.setHowDirty(IsItLaundryEnum.LIKAINEN);
         assertEquals(IsItLaundryEnum.LIKAINEN, clothing.getHowDirty());
     }
-    
+
     @Test
-    public void toStringWorks() {
-        assertEquals("Vaate kiva paita on " + SizeEnum.XSMALL + "-kokoinen ja " + 32 + "-kokoinen. Sen väri on " + ColorsEnum.KELTAINEN + " ja se on " + TypeEnum.TPAITA, clothing.toString());
+    public void doesRepairRepairWhenBroken() {
+        clothing.setCondition(ConditionEnum.RIKKI);
+        clothing.repair();
+        assertEquals(ConditionEnum.EHJA, clothing.getCondition());
     }
-    
+
+    @Test
+    public void doesRepairNotRepairWhenIsNotBroken() {
+        clothing.setCondition(ConditionEnum.KULUNUT);
+        clothing.repair();
+        assertEquals(ConditionEnum.KULUNUT, clothing.getCondition());
+    }
+
+    @Test
+    public void doesWashWashWhenDirty() {
+        clothing.setHowDirty(IsItLaundryEnum.LIKAINEN);
+        clothing.wash();
+        assertEquals(IsItLaundryEnum.PUHDAS, clothing.getHowDirty());
+    }
+
+    @Test
+    public void doesWashNotWashWhenNotDirty() {
+        clothing.setHowDirty(IsItLaundryEnum.KAYTETTY);
+        clothing.wash();
+        assertEquals(IsItLaundryEnum.KAYTETTY, clothing.getHowDirty());
+    }
+
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
