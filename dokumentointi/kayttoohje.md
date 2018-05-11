@@ -14,7 +14,7 @@ Tekstikenttään kuuluu syöttää kaapin omistajan nimi ja sitten vain painetaa
 takaisin aloitusnäkymään painetaan nappia "Siirry alkunäkymään".
 
 ## Vaatteen luominen ja lisääminen kaappiin
-(Tekstiä!)
+Vaatteen voi luoda ja samalla lisätä kaappiin painamalla "Luo vaate" nappia.
 
 ## Kaapin tarkastelu
 Kaappiin pääsee painamalla nappia "Kaappiin" aloitusnäkymässä. Tässä sovelluksessa ei ole kuin yksi käyttäjä kerrallaan, joten
@@ -22,7 +22,7 @@ kaappeja on vain yksi. Kaapissa voit valita mihin hyllyyn haluaa siirtyä. Hylly
 Valitse hylly pudotusvalikosta ja paina nappia "valitse hylly" niin pääset kyseiseen hyllyyn.
 
 ## Hyllyn tarkastelu
-(Tekstiä!)
+Hyllyssä voi valita vaatteen. Hyllyssä voi myös poistaa vaatteita ja muutenkin päivittää vaatteen tietoja.
 
 ## Vaatteen tarkastelu
-(Tekstiä!)
+Vaatetta voi tarkastella ja nähdä mitä se sisältää.
